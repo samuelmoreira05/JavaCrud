@@ -29,5 +29,20 @@ public class UsuarioDao {
             e.printStackTrace();
         }
     }
+    public boolean excluirUsuario(int id) {
+        String sql = "DELETE FROM USUARIOS WHERE ID = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, id);
+            int linhasAfetadas = ps.executeUpdate();
+            ps.close();
+            return linhasAfetadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
